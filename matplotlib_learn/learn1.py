@@ -257,7 +257,7 @@ y = x ** 2
 # for label in ax2.get_yticklabels():
 #     label.set_color("red")
 # show()
-
+#
 # # 四维象限的坐标
 # fig, ax = plt.subplots()
 #
@@ -269,12 +269,12 @@ y = x ** 2
 #
 # ax.yaxis.set_ticks_position('left')
 # ax.spines['left'].set_position(('data',0))   # set position of y spine to y=0
-#
+# #
 # xx = np.linspace(-0.75, 1., 100)
 # ax.plot(xx, xx**3)
 # show()
 #
-# # 其它风格的图片(散点,柱状图,填图模式)
+# # # 其它风格的图片(散点,柱状图,填图模式)
 # n = np.array([0,1,2,3,4,5])
 #
 #
@@ -298,19 +298,20 @@ y = x ** 2
 # ax.plot(t, t, color='blue', lw=3);
 # show()
 #
-# # 直方图
-# n = np.random.randn(100000)
-# fig, axes = plt.subplots(1, 2, figsize=(12,4))
-#
-# axes[0].hist(n)
-# axes[0].set_title("Default histogram")
-# axes[0].set_xlim((min(n), max(n)))
-#
-# axes[1].hist(n, cumulative=True, bins=50)
-# axes[1].set_title("Cumulative detailed histogram")
-# axes[1].set_xlim((min(n), max(n)));
-#
-# show()
+
+# 直方图
+n = np.random.randn(100000)
+fig, axes = plt.subplots(1, 2, figsize=(12,4))
+
+axes[0].hist(n)
+axes[0].set_title("Default histogram")
+axes[0].set_xlim((min(n), max(n)))
+
+axes[1].hist(n, cumulative=True, bins=50)
+axes[1].set_title("Cumulative detailed histogram")
+axes[1].set_xlim((min(n), max(n)))
+
+show()
 #
 # # 在曲线位置加上注释
 # fig, ax = plt.subplots()
@@ -380,63 +381,63 @@ y = x ** 2
 # show()
 
 
-# 3维图像
-alpha = 0.7
-phi_ext = 2 * np.pi * 0.5
-
-def flux_qubit_potential(phi_m, phi_p):
-    return 2 + alpha - 2 * np.cos(phi_p) * np.cos(phi_m) - alpha * np.cos(phi_ext - 2*phi_p)
-
-phi_m = np.linspace(0, 2*np.pi, 100)
-phi_p = np.linspace(0, 2*np.pi, 100)
-X,Y = np.meshgrid(phi_p, phi_m)
-Z = flux_qubit_potential(X, Y).T
-
-from mpl_toolkits.mplot3d.axes3d import Axes3D
-fig = plt.figure(figsize=(14,6))
-
-# `ax` is a 3D-aware axis instance because of the projection='3d' keyword argument to add_subplot
-ax = fig.add_subplot(1, 2, 1, projection='3d')
-
-p = ax.plot_surface(X, Y, Z, rstride=4, cstride=4, linewidth=0)
-
-# surface_plot with color grading and color bar
-ax = fig.add_subplot(1, 2, 2, projection='3d')
-p = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=matplotlib.cm.coolwarm, linewidth=0, antialiased=False)
-cb = fig.colorbar(p, shrink=0.5)
-show()
-
-fig = plt.figure(figsize=(8,6))
-
-ax = fig.add_subplot(1, 1, 1, projection='3d')
-
-p = ax.plot_wireframe(X, Y, Z, rstride=4, cstride=4)
-show()
-
-fig = plt.figure(figsize=(8,6))
-
-ax = fig.add_subplot(1,1,1, projection='3d')
-
-ax.plot_surface(X, Y, Z, rstride=4, cstride=4, alpha=0.25)
-cset = ax.contour(X, Y, Z, zdir='z', offset=-np.pi, cmap=matplotlib.cm.coolwarm)
-cset = ax.contour(X, Y, Z, zdir='x', offset=-np.pi, cmap=matplotlib.cm.coolwarm)
-cset = ax.contour(X, Y, Z, zdir='y', offset=3*np.pi, cmap=matplotlib.cm.coolwarm)
-
-ax.set_xlim3d(-np.pi, 2*np.pi);
-ax.set_ylim3d(0, 3*np.pi);
-ax.set_zlim3d(-np.pi, 2*np.pi)
-show()
-
-fig = plt.figure(figsize=(12,6))
-
-ax = fig.add_subplot(1,2,1, projection='3d')
-ax.plot_surface(X, Y, Z, rstride=4, cstride=4, alpha=0.25)
-ax.view_init(30, 45)
-
-ax = fig.add_subplot(1,2,2, projection='3d')
-ax.plot_surface(X, Y, Z, rstride=4, cstride=4, alpha=0.25)
-ax.view_init(70, 30)
-
-fig.tight_layout()
-show()
-
+# # 3维图像
+# alpha = 0.7
+# phi_ext = 2 * np.pi * 0.5
+#
+# def flux_qubit_potential(phi_m, phi_p):
+#     return 2 + alpha - 2 * np.cos(phi_p) * np.cos(phi_m) - alpha * np.cos(phi_ext - 2*phi_p)
+#
+# phi_m = np.linspace(0, 2*np.pi, 100)
+# phi_p = np.linspace(0, 2*np.pi, 100)
+# X,Y = np.meshgrid(phi_p, phi_m)
+# Z = flux_qubit_potential(X, Y).T
+#
+# from mpl_toolkits.mplot3d.axes3d import Axes3D
+# fig = plt.figure(figsize=(14,6))
+#
+# # `ax` is a 3D-aware axis instance because of the projection='3d' keyword argument to add_subplot
+# ax = fig.add_subplot(1, 2, 1, projection='3d')
+#
+# p = ax.plot_surface(X, Y, Z, rstride=4, cstride=4, linewidth=0)
+#
+# # surface_plot with color grading and color bar
+# ax = fig.add_subplot(1, 2, 2, projection='3d')
+# p = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=matplotlib.cm.coolwarm, linewidth=0, antialiased=False)
+# cb = fig.colorbar(p, shrink=0.5)
+# show()
+#
+# fig = plt.figure(figsize=(8,6))
+#
+# ax = fig.add_subplot(1, 1, 1, projection='3d')
+#
+# p = ax.plot_wireframe(X, Y, Z, rstride=4, cstride=4)
+# show()
+#
+# fig = plt.figure(figsize=(8,6))
+#
+# ax = fig.add_subplot(1,1,1, projection='3d')
+#
+# ax.plot_surface(X, Y, Z, rstride=4, cstride=4, alpha=0.25)
+# cset = ax.contour(X, Y, Z, zdir='z', offset=-np.pi, cmap=matplotlib.cm.coolwarm)
+# cset = ax.contour(X, Y, Z, zdir='x', offset=-np.pi, cmap=matplotlib.cm.coolwarm)
+# cset = ax.contour(X, Y, Z, zdir='y', offset=3*np.pi, cmap=matplotlib.cm.coolwarm)
+#
+# ax.set_xlim3d(-np.pi, 2*np.pi);
+# ax.set_ylim3d(0, 3*np.pi);
+# ax.set_zlim3d(-np.pi, 2*np.pi)
+# show()
+#
+# fig = plt.figure(figsize=(12,6))
+#
+# ax = fig.add_subplot(1,2,1, projection='3d')
+# ax.plot_surface(X, Y, Z, rstride=4, cstride=4, alpha=0.25)
+# ax.view_init(30, 45)
+#
+# ax = fig.add_subplot(1,2,2, projection='3d')
+# ax.plot_surface(X, Y, Z, rstride=4, cstride=4, alpha=0.25)
+# ax.view_init(70, 30)
+#
+# fig.tight_layout()
+# show()
+#
